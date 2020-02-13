@@ -1,0 +1,77 @@
+{
+	"pages": [{
+			"path": "pages/tabs/index/index",
+			"style": {
+				"navigationBarTitleText": "欢迎点餐"
+				
+			}
+		},
+		{
+			"path": "pages/tabs/cart/cart",
+			"style": {
+				"navigationBarTitleText": "购物车"
+				// "app-plus": {
+				//         "animationType": "slide-in-right",
+				//         "animationDuration": 3000
+				//     }
+			}
+		},
+		{
+			"path": "pages/tabs/order/order",
+			"style": {
+				"navigationBarTitleText": "订单",
+				"app-plus": {
+					"bounce": "none",
+					"titleNView": {
+						"buttons": [{
+								"text": "关于我们>",
+								"fontSize": "15",
+								"float": "right",
+								"color": "#00d8a0"
+							}
+						]
+					}
+				}
+			}
+		}, {
+			"path": "pages/about/about",
+			"style": {
+				"navigationBarTitleText": "关于我们"
+			}
+		}, {
+			"path": "pages/tabs/cart/confirm",
+			"style": {}
+		}
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "手机点餐",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8"
+	},
+	"tabBar": {
+		"color": "#bfbfbf",
+		"selectedColor": "#00d8a0",
+		"borderStyle": "black",
+		"backgroundColor": "#ffffff",
+		"list": [{
+				"pagePath": "pages/tabs/index/index",
+				"iconPath": "static/tabs/index.png",
+				"selectedIconPath": "static/tabs/index1.png",
+				"text": "首页"
+			},
+			{
+				"pagePath": "pages/tabs/cart/cart",
+				"iconPath": "static/tabs/cart.png",
+				"selectedIconPath": "static/tabs/cart1.png",
+				"text": "购物车"
+			},
+			{
+				"pagePath": "pages/tabs/order/order",
+				"iconPath": "static/tabs/order.png",
+				"selectedIconPath": "static/tabs/order1.png",
+				"text": "订单"
+			}
+		]
+	}
+}
