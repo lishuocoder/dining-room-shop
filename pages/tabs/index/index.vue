@@ -57,7 +57,6 @@
 <script>
 	import itemContainer from '@/components/index/item-container.vue'
 	import uniNoticeBar from '@/components/tonggaolan/uni-notice-bar/uni-notice-bar.vue'
-	import mockData from '@/data/cart.js'
 	import WarningBox from '@/components/warning-box/warning-box'
 
 	export default {
@@ -73,7 +72,6 @@
 				foodsList: [],
 				scrollHeight: '500px',
 				leftIndex: 0,
-				cartList: [], //购物车json数组
 				show: false
 			}
 		},
@@ -88,7 +86,6 @@
 				localStorage.setItem("desk_id", option.desk_id);
 			}
 			console.log("桌号是:", localStorage.getItem("desk_id"));
-			this.cartList = mockData.cartList;
 			/* 设置当前滚动容器的高，若非窗口的高度，请自行修改 */
 			uni.getSystemInfo({
 				success: (res) => {
@@ -97,22 +94,30 @@
 			});
 			// console.log(this.$apiPath);
 			uni.request({
-					//轮播图接口
-					url: this.$apiPath + "?c=banner&a=index",
-					dataType: 'json',
-					success: (res) => {
+				//轮播图接口
+				url: this.$apiPath + "?c=banner&a=index",
+				dataType: 'json',
+				success: (res) => {
+					if (res.data.error == 0){
 						// console.log(res.data);
-						this.bannerList = res.data.data;
+					this.bannerList = res.data.data;
+					}else{
+						console.log(res.data.msg)
+						}
 					}
 				}),
-				uni.request({
-					//分类接口
-					url: this.$apiPath + "?c=type&a=index",
-					dataType: 'json',
-					success: (res) => {
+			uni.request({
+				//分类接口
+				url: this.$apiPath + "?c=type&a=index",
+				dataType: 'json',
+				success: (res) => {
+					if(res.data.error == 0){
 						this.typeList = res.data.data;
-						// console.log(res.data.data[0].id)
-						this.getFoodsList(res.data.data[0].id);
+					// console.log(res.data.data[0].id)
+					this.getFoodsList(res.data.data[0].id);
+					}else{
+						console.log(res.data.msg)
+						}
 					}
 				})
 		},
@@ -140,7 +145,11 @@
 						type_id: typeId
 					},
 					success: (res) => {
+						if(res.data.error == 0){
 						this.foodsList = res.data.data;
+						}else{
+						console.log(res.data.msg)
+						}
 					}
 				})
 			},
@@ -149,38 +158,45 @@
 				//查询购物车中是否包含此菜品
 				//如果不包含,直接加入
 				//如果包含,此菜品数量+1
-				for (var i = 0; i < this.cartList.length; i++) {
-					if (this.cartList[i].id == item.id) {
+				for (var i = 0; i < this.$cartList.length; i++) {
+					if (this.$cartList[i].id == item.id) {
 						//循环遍历,如果在列表中发现此菜品,则直接返回,余下的菜品无需遍历
 						console.log("购物车中已经存在");
-						this.cartList[i].number += 1;
-						this.$msg(item.name + '数量:' + this.cartList[i].number);
-						// this.cartList.reverse()
-						this.cartList.splice(i, 1, this.cartList[i])
+						this.$cartList[i].number += 1;
+						this.$msg(item.name + '数量:' + this.$cartList[i].number);
+						// this.$cartList.reverse()
+						this.$cartList.splice(i, 1, this.$cartList[i])
 						return false;
 					}
 				}
 				item.number = 1;
 				item.checked = true;
-				this.cartList.push(item)
+				this.$cartList.push(item)
 				this.$msg('已加入购物车');
+				console.log(this.$cartList)
 			}
 		},
 		onShow() {
-			this.getFoodsList(1)
+			if (this.typeList.length > 0) {
+				this.getFoodsList(this.typeList[this.leftIndex].id)
+			}
 		}
 	}
 </script>
 
 <style lang="scss">
+	page {
+		// background: #f2f2f2;
+	}
+
 	swiper {
-		height: 300upx;
+		height: 300rpx;
 
 		.swiper-image {
-			height: 300upx;
-			width: 690upx;
-			margin: 0 30upx;
-			border-radius: 15upx;
+			height: 300rpx;
+			width: 690rpx;
+			margin: 20rpx 30rpx 10rpx 30rpx;
+			border-radius: 15rpx;
 		}
 	}
 
@@ -194,6 +210,8 @@
 		align-items: flex-start;
 		align-content: flex-start;
 		font-size: 28rpx;
+		margin-right: 30rpx;
+		border-radius: 15rpx;
 
 		.left {
 			width: 176rpx;
@@ -216,7 +234,7 @@
 						display: block;
 						height: 0;
 						border-top: #d6d6d6 solid 1px;
-						width: 620upx;
+						width: 620rpx;
 						position: absolute;
 						top: -1px;
 						right: 0;
@@ -311,6 +329,9 @@
 					position: absolute;
 					right: 27rpx;
 					bottom: 63rpx;
+				}
+				.add_img:active {
+					transform: translate(4rpx, 4rpx);
 				}
 			}
 		}

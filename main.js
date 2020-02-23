@@ -15,6 +15,8 @@ Vue.prototype.$isLogin=util.isLogin
 
 Vue.prototype.$store=store
 
+Vue.prototype.$cartList = []
+
 Vue.config.productionTip = false
 
 App.mpType = 'app'

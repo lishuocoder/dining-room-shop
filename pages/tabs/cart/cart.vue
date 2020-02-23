@@ -1,14 +1,13 @@
 <template>
 	<view class="container">
-		<empty v-if='cartList.length===0'></empty>
-		<cart-item ref='cart' v-else :cartList="cartList" @getNewCartList="getNewCartList"></cart-item>
+		<empty v-if='this.$cartList.length===0'></empty>
+		<cart-item ref='cart' v-if="showList" @refresh="refresh"></cart-item>
 	</view>
 </template>
 
 <script>
 	import empty from '@/components/cart/empty.vue'
 	import cartItem from '@/components/cart/cart-item.vue'
-	import mockData from '@/data/cart.js'
 	export default {
 		components: {
 			empty,
@@ -16,20 +15,29 @@
 		},
 		data() {
 			return {
-				cartList: []
-			};
+				showList: true
+			}
 		},
-		onLoad() {
-			this.cartList = mockData.cartList;
-		},
+		onLoad() {},
 		methods: {
-			getNewCartList(data) {
-				this.cartList = data
-				// console.log(666)
+			refresh() {
+				if (this.$cartList.length < 1) {
+					this.showList = false;
+				}
+				this.$forceUpdate()
 			}
 		},
 		onShow() {
+			console.log('456666', this.$cartList)
 			this.$forceUpdate() //强制刷新组件
+			if (this.$cartList.length > 0) {
+				this.showList = false
+				this.$nextTick(() => {
+					this.showList = true
+				})
+			} else {
+				this.showList = false
+			}
 		}
 	}
 </script>

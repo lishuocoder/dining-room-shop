@@ -2,7 +2,7 @@
 	<view class="body" :style="{ 'height':bodyHeight }">
 		<view class="time_clock  ">
 			<image class="clock_image" src="/static/order/clock.png"></image>
-			<text class="goods_time">{{order_time}}</text>
+			<view class="goods_time">{{order_time}}</view>
 		</view>
 		<view class="main">
 			<view class="goods" v-for="(item,index) in list" :key="index" @click="goToPage(item)">
@@ -83,14 +83,14 @@
 		font-size: 25upx;
 		color: #1a1a1a;
 		opacity: 0.5;
-
+		margin:0 10rpx 10rpx 30rpx;
 	}
 
 	.clock_image {
 		width: 33.3upx;
 		height: 33.3upx;
-		margin-right: 10upx;
-		// margin-top: 50rpx;
+		margin:0 10rpx 10rpx 30rpx;
+		float: left;
 	}
 
 	.main {
@@ -174,6 +174,9 @@
 		line-height: 58upx;
 		border: 3upx solid $theme-color;
 		border-radius: 6upx;
+	}
+	._btn:active{
+		transform: translate(4rpx, 4rpx);
 	}
 	.buttom {
 		/* #ifdef H5 */

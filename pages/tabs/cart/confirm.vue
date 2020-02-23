@@ -1,6 +1,5 @@
 <template>
 	<view class="body" :style="{ 'height':bodyHeight }">
-		<!-- <view class="title">提交订单</view> -->
 		<view class="main">
 			<view class="goods" v-for="item in confirmList">
 				<image :src="item.img" />
@@ -48,7 +47,6 @@
 </template>
 
 <script>
-	import confirmList from '@/data/cart.js'
 	import WarningBox from '@/components/warning-box/warning-box'
 
 	export default {
@@ -66,9 +64,8 @@
 			}
 		},
 		onLoad() {
-			// this.confirmList = confirmList.cartList;
-			this.confirmList = confirmList.cartList.filter((item)=>{
-					return item.checked == true;
+			this.confirmList = this.$cartList.filter((item) => {
+				return item.checked == true;
 			})
 			this.orderList = this.confirmList.map((item) => {
 				return {
@@ -119,22 +116,23 @@
 							foods: JSON.stringify(this.orderList)
 						},
 						success: (res) => {
-							console.log(res.data);
+							if(res.data.error == 0){
+								this.$cartList.length = 0
+							}else{
+								console.log(res.data.msg)
+							}
 						}
 					}),
-				setTimeout(function() {
-					this.show = true;
-				}.bind(this), 800)
-
+					setTimeout(function() {
+						this.show = true;
+					}.bind(this), 800)
 			},
 			cancel() {
-				this.confirmList.length = 0;
 				uni.switchTab({
 					url: 'cart'
 				})
 			},
 			confirm() {
-				this.confirmList.length = 0;
 				uni.switchTab({
 					url: '../order/order',
 					animationType: 'pop-in',
@@ -145,6 +143,7 @@
 				console.log(e);
 				this.index = e.detail.value;
 			}
+
 		}
 	}
 </script>

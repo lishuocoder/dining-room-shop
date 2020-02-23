@@ -25,7 +25,7 @@
 					"titleNView": {
 						"buttons": [{
 								"text": "关于我们>",
-								"fontSize": "15",
+								"fontSize": "13",
 								"float": "right",
 								"color": "#00d8a0"
 							}
@@ -38,7 +38,8 @@
 			"style": {
 				"navigationBarTitleText": "关于我们"
 			}
-		}, {
+		}, 
+		{
 			"path": "pages/tabs/cart/confirm",
 			"style": {}
 		}
@@ -53,7 +54,7 @@
 		"color": "#bfbfbf",
 		"selectedColor": "#00d8a0",
 		"borderStyle": "black",
-		"backgroundColor": "#ffffff",
+		"backgroundColor": "#f2f2f2",
 		"list": [{
 				"pagePath": "pages/tabs/index/index",
 				"iconPath": "static/tabs/index.png",

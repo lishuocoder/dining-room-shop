@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<view class="cart-list">
-			<block v-for="(item, index) in thisCartList" :key="item.id">
+			<block v-for="(item, index) in this.$cartList" :key="item.id">
 				<view class="cart-item">
 					<checkbox :checked='item.checked' color='#00d8a0' @click="check('item', index)" />
 					<view class="image-wrapper">
@@ -38,31 +38,23 @@
 		components: {
 			uniNumberBox
 		},
-		props: {
-			cartList: {
-				type: Array,
-				default: function() {
-					return []
-				}
-			}
-		},
 		data() {
 			return {
 				totalPrice: 0,
-				thisCartList: [],
 				update: true
 			}
 		},
 		methods: {
 			//数量
 			numberChange(data) {
-				this.thisCartList[data.index].number = data.number;
+				this.$cartList[data.index].number = data.number;
 				this.updateTotalPrice();
 			},
 			//计算总价
 			updateTotalPrice() {
-				let list = this.thisCartList;
+				let list = this.$cartList;
 				if (list.length === 0) {
+					this.totalPrice = 0
 					return;
 				}
 				let totalPrice = 0;
@@ -76,48 +68,44 @@
 			//选中状态处理
 			check(type, index) {
 				if (type === 'item') {
-					this.thisCartList[index].checked = !this.thisCartList[index].checked
+					this.$cartList[index].checked = !this.$cartList[index].checked
 				}
 				this.updateTotalPrice();
 			},
 			//删除数据
 			delCart(id) {
-				this.thisCartList.forEach((item, index) => {
+				this.$cartList.forEach((item, index) => {
 					console.log(id);
 					if (id == item.id) {
-						this.thisCartList.splice(index, 1);
+						this.$cartList.splice(index, 1);
 						console.log("进来了");
 					}
 				})
 				this.updateTotalPrice();
+				if (this.$cartList.length < 1) {
+					this.$emit("refresh")
+				}
 			},
 			//点击去结算生产订单
 			createOrder() {
-				this.$msg('生成订单中', 1000);
-				setTimeout(function() {
-					this.skip()
-				}.bind(this), 800)
+				if (this.totalPrice == 0) {
+					this.$msg('请勾选菜品', 1000)
+				} else {
+					this.$msg('生成订单中', 1000);
+					setTimeout(function() {
+						this.skip()
+					}.bind(this), 800)
+				}
 			},
 			skip() {
 				this.$jump('/pages/tabs/cart/confirm')
 			},
 		},
 		mounted() {
-			this.thisCartList = this.cartList
+			// console.log('cart-item->mounted()')
+			// this.$forceUpdate()
 			this.updateTotalPrice();
-			// console.log(1111111,this.cartList)
-		},
-		watch: {
-			thisCartList(val, newval) {
-				this.updateTotalPrice();
-				this.$emit("getNewCartList", val)
-				this.update = false
-				this.$nextTick(() => {
-					this.update = true
-				})
-			}
 		}
-
 	}
 </script>
 
