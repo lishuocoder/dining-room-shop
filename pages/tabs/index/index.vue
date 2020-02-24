@@ -43,7 +43,7 @@
 										<view class="sales_volume">销量:{{item.sales_volume}}</view>
 										<view class="money"> ￥{{item.price}}</view>
 									</view>
-									<image class="add_img" src="../../../static/type/add.png" @click="add_cart(item)"></image>
+									<image class="add_img" src="../../../static/type/add.png" :data-img="item.img"  @tap="add_cart(item,$event)" ></image>
 								</view>
 							</view>
 						</scroll-view>
@@ -51,6 +51,8 @@
 				</swiper>
 			</view>
 		</view>
+		<!-- 加入购物车动画 cartx 和 carty 是购物车位置在屏幕位置的比例 例如左上角x0.1 y0.1 右下角 x0.9 y0.9-->
+			<shopCarAnimation ref="carAnmation" cartx="0.45" carty="1.1"></shopCarAnimation>
 	</view>
 </template>
 
@@ -58,12 +60,15 @@
 	import itemContainer from '@/components/index/item-container.vue'
 	import uniNoticeBar from '@/components/tonggaolan/uni-notice-bar/uni-notice-bar.vue'
 	import WarningBox from '@/components/warning-box/warning-box'
-
+	//  加入购物车动画组件
+	import shopCarAnimation from '@/components/fly-in-cart/fly-in-cart.vue'
+	
 	export default {
 		components: {
 			itemContainer,
 			uniNoticeBar,
-			WarningBox
+			WarningBox,
+			shopCarAnimation
 		},
 		data() {
 			return {
@@ -154,10 +159,11 @@
 				})
 			},
 			//添加到购物车
-			add_cart(item) {
+			add_cart(item,e) {
 				//查询购物车中是否包含此菜品
 				//如果不包含,直接加入
 				//如果包含,此菜品数量+1
+				this.$refs.carAnmation.touchOnGoods(e);
 				for (var i = 0; i < this.$cartList.length; i++) {
 					if (this.$cartList[i].id == item.id) {
 						//循环遍历,如果在列表中发现此菜品,则直接返回,余下的菜品无需遍历
@@ -173,8 +179,13 @@
 				item.checked = true;
 				this.$cartList.push(item)
 				this.$msg('已加入购物车');
-				console.log(this.$cartList)
-			}
+				// console.log(this.$cartList)
+			},
+			// addShopCar(e) {
+			// 	//加到购物车动画方法(不知到为什么不能和加入到购物车方法一起写)
+			// 	console.log("lalala")
+				
+			// }
 		},
 		onShow() {
 			if (this.typeList.length > 0) {
@@ -333,6 +344,9 @@
 				.add_img:active {
 					transform: translate(4rpx, 4rpx);
 				}
+			}
+			.goods:active{
+				background-color: #f6f6f6;
 			}
 		}
 	}

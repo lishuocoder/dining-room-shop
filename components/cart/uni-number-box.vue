@@ -10,7 +10,6 @@
 			type="number" 
 			:disabled="disabled"
 			:value="inputValue" 
-			
 			@blur="_onBlur"
 		>
 		<view 
@@ -149,8 +148,8 @@
 		align-items: center;
 		height: 50upx;
 		position: absolute;
-		border:1px solid #C0C0C0;
-		border-radius: 8upx;
+		/* border:1px solid #C0C0C0; */
+		/* border-radius: 8upx; */
 		width: 150rpx;
 		bottom:0rpx;
 		right: 116rpx;
@@ -159,10 +158,13 @@
 	.uni-numbox-minus,
 	.uni-numbox-plus {
 		margin: 0;
-		background-color: #f8f8f8;
+		/* background-color: #f8f8f8; */
+		border-radius: 50%;
+		background-color: #ace7e4;
 		width: 50upx;
 		height: 50upx;
-		font-size: 30upx;
+		font-size: 34upx;
+		font-weight: 800;
 		line-height: 50upx;
 		text-align: center;
 		display: inline-flex;
@@ -171,10 +173,10 @@
 		color: #333;
 		position: relative;
 	}
-	
-	
-
-	
+	.uni-numbox-minus:active,
+	.uni-numbox-plus:active{
+		transform: translate(4rpx, 4rpx);
+	}
 
 	.uni-numbox-value {
 		position: relative;
@@ -184,8 +186,8 @@
 		text-align: center;
 		padding: 0;
 		font-size: 30upx;
-		border-left:1px solid #C0C0C0;
-		border-right:1px solid #C0C0C0;
+		/* border-left:1px solid #C0C0C0;
+		border-right:1px solid #C0C0C0; */
 	}
 	
 

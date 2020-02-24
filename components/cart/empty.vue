@@ -41,6 +41,9 @@
 				color: $theme-color;
 				margin-left: 16upx;
 			}
+			.navigator:active{
+				transform: translate(6rpx, 6rpx);
+			}
 		}
 	}
 </style>
