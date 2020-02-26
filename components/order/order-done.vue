@@ -5,7 +5,7 @@
 			<view class="goods_time">{{order_time}}</view>
 		</view>
 		<view class="main">
-			<view class="goods" v-for="(item,index) in list" :key="index" @click="goToPage(item)">
+			<view class="goods" v-for="(item,index) in formList" :key="index" @click="goToPage(item)">
 				<image :src="item.img" />
 				<view>
 					<view class="name">{{item.name}}</view>
@@ -48,6 +48,16 @@
 		data() {
 			return {
 				bodyHeight: "1000rpx",
+			}
+		},
+		computed: {
+			//增加一个过滤器，将list里的菜品个数等于0的菜品过滤出去，返回个数非0的菜品
+			formList: function() {
+				return this.list.filter(function(item) {
+					if (item.num != 0) {
+						return item;
+					}
+				})
 			}
 		},
 		methods: {
