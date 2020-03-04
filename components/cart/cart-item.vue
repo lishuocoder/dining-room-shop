@@ -93,17 +93,12 @@
 				} else {
 					this.$msg('生成订单中', 1000);
 					setTimeout(function() {
-						this.skip()
+						this.$jump('/pages/tabs/cart/confirm')
 					}.bind(this), 800)
 				}
-			},
-			skip() {
-				this.$jump('/pages/tabs/cart/confirm')
-			},
+			}
 		},
 		mounted() {
-			// console.log('cart-item->mounted()')
-			// this.$forceUpdate()
 			this.updateTotalPrice();
 		}
 	}
@@ -192,7 +187,7 @@
 	/* 底部栏 */
 	.action-section {
 		/* #ifdef H5 */
-		margin-bottom: 100upx;
+		margin-bottom: 120upx;
 		/* #endif */
 		position: fixed;
 		bottom: 0;
@@ -200,31 +195,37 @@
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		width: 750upx;
+		width: 95%;
 		height: 100upx;
-		background: #FFFFFF;
+		background: #f2f2f2;
+		border-radius: 279rpx;
+		margin-left: 2.5%;
 
 		.total-box {
 			display: flex;
-
 			margin-left: 30upx;
 
 			.price-title {
-				font-size: 32upx;
+				font-size: 38upx;
 				color: black;
+			}
+			.price-number {
+				font-size: 38upx;
+				color: $theme-color;
 			}
 
 		}
 
 		.confirm-btn {
-			width: 250upx;
+			width: 207upx;
 			height: 100upx;
-			line-height: 100upx;
+			line-height: 110upx;
 			text-align: center;
 			font-size: 32upx;
 			background: $theme-color;
 			color: #FFFFFF;
-
+			border-top-right-radius: 33px;
+			border-bottom-right-radius: 33px;
 		}
 	}
 </style>

@@ -37,7 +37,6 @@
 		<!-- 底部菜单栏 -->
 		<view class="action-section">
 			<view class="total-box">
-				<text class="price-title">合计：</text>
 				<text class="price-number">{{totalPrice | currency}}</text>
 			</view>
 			<view class="confirm-btn" @click="createOrder">提交订单</view>
@@ -85,7 +84,7 @@
 		filters: {
 			currency(value) {
 				if (!value) return 0.0;
-				return "￥" + value.toFixed(2) + "元";
+				return "￥" + value.toFixed(2);
 			}
 		},
 		computed: {
@@ -256,16 +255,10 @@
 
 		.total-box {
 			display: flex;
-
-			margin-left: 30upx;
-
-			.price-title {
-				font-size: 32upx;
-				color: black;
-			}
-
+			margin-left: 60upx;
+			
 			.price-number {
-				font-size: 32upx;
+				font-size: 38upx;
 				color: $theme-color;
 			}
 		}
@@ -273,7 +266,7 @@
 		.confirm-btn {
 			width: 207upx;
 			height: 100upx;
-			line-height: 100upx;
+			line-height: 110upx;
 			text-align: center;
 			font-size: 32upx;
 			background: $theme-color;
