@@ -1,9 +1,9 @@
 <template>
 	<view>
 		<view class="cart-list">
-			<block v-for="(item, index) in this.$cartList" :key="item.id">
+			<side-slip v-for="(item, index) in this.$cartList" :key="item.id" @remove="delCart(item.id)">
 				<view class="cart-item">
-					<checkbox :checked='item.checked' color='#00d8a0' @click="check('item', index)" />
+					<checkbox :checked='item.checked' color='#00d8a0' />
 					<view class="image-wrapper">
 						<image :src="item.img" mode="aspectFill"></image>
 					</view>
@@ -12,13 +12,12 @@
 						<text class="attr">{{item.explain}}</text>
 						<view class="item-last">
 							<text class="good-price">¥{{item.price}}</text>
-							<image class="cart-delete" src="/static/cart/delete.png" @click="delCart(item.id)"></image>
 							<uni-number-box :min="1" :value="item.number" :isMin="item.number===1" :index="index" @eventChange="numberChange"
 							 :data-index='item.index' v-if="update"></uni-number-box>
 						</view>
 					</view>
 				</view>
-			</block>
+			</side-slip>
 		</view>
 		<!-- 底部菜单栏 -->
 		<view class="action-section">
@@ -33,10 +32,12 @@
 
 <script>
 	import uniNumberBox from '@/components/cart/uni-number-box.vue'
+	import SideSlip from '@/components/cart/side-slip.vue'
 	export default {
 		name: 'cart-item',
 		components: {
-			uniNumberBox
+			uniNumberBox,
+			SideSlip
 		},
 		data() {
 			return {
@@ -165,14 +166,6 @@
 					color: $theme-color;
 					height: 50upx;
 					line-height: 50upx;
-				}
-
-				.cart-delete {
-					width: 50rpx;
-					height: 50rpx;
-					position: absolute;
-					right: -2rpx;
-					bottom: 0rpx
 				}
 
 				.uni-numbox {

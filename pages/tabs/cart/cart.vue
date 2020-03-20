@@ -18,7 +18,20 @@
 				showList: true
 			}
 		},
-		onLoad() {},
+		onLoad() {
+			/* 购物车角标  还没实现,先放下
+			uni.setTabBarBadge({
+				index: 1,
+				// text: localStorage.getItem("cartNums")
+				text:localStorage.getItem("cartNums")
+			}),
+			this.$cartList.forEach((item) => {
+				console.log(item.number);
+				this.$cartNum = this.$cartNum * 1 + item.number;
+				// localStorage.setItem("cartNums", this.$cartNum);
+				console.log(this.$cartNum)
+			})*/
+		},
 		methods: {
 			refresh() {
 				if (this.$cartList.length < 1) {
@@ -45,6 +58,5 @@
 <style lang='scss'>
 	.container {
 		padding-bottom: 134upx;
-
 	}
 </style>

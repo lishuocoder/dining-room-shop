@@ -152,7 +152,7 @@
 		/* border-radius: 8upx; */
 		width: 150rpx;
 		bottom:0rpx;
-		right: 116rpx;
+		right: 10rpx;
 	}
 
 	.uni-numbox-minus,

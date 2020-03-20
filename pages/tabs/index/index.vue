@@ -119,7 +119,7 @@
 					if(res.data.error == 0){
 						this.typeList = res.data.data;
 					// console.log(res.data.data[0].id)
-					this.getFoodsList(res.data.data[0].id);
+ 					this.getFoodsList(res.data.data[0].id);
 					}else{
 						console.log(res.data.msg)
 						}
@@ -258,6 +258,7 @@
 				&:active {
 					color: #00d8a0;
 					background-color: #fff;
+					// border-right: $theme-color 3px solid;
 				}
 			}
 		}

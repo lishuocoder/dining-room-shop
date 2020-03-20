@@ -1,4 +1,4 @@
-//const apiPath ='http://dining-room3.local/' //API根路径
+// const apiPath ='http://dining-room3.local/' //API根路径
 const apiPath ='http://lishuo-api.liyangweb.com/' //API根路径
 
 //简化uni.request
@@ -45,21 +45,7 @@ const jump=(url)=>{
 		url:url
 	})
 }
-//判断是否登录，否则跳转到登录页
-const isLogin = (hasLogin) => {
-	if (!hasLogin) {
-		uni.showModal({
-			content: '请先登陆',
-			confirmText: '去登陆',
-			success(res) {
-				res.confirm && uni.navigateTo({
-					url: '/pages/login/login/login'
-				})
-			}
-		})
-		return;
-	}
-}
+
 //格式化时间
 const formatTime = (timeStamp) => {
 	let currentTime = Date.parse(new Date()) / 1000;
@@ -104,7 +90,6 @@ export default {
 	prePage,
 	msg,
 	jump,
-	isLogin,
 	formatTime,
 	getDistance,
 }
