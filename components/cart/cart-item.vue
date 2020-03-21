@@ -3,7 +3,7 @@
 		<view class="cart-list">
 			<side-slip v-for="(item, index) in this.$cartList" :key="item.id" @remove="delCart(item.id)">
 				<view class="cart-item">
-					<checkbox :checked='item.checked' color='#00d8a0' />
+					<checkbox :checked='item.checked' color='#00d8a0' @click="check('item', index)" />
 					<view class="image-wrapper">
 						<image :src="item.img" mode="aspectFill"></image>
 					</view>
@@ -25,14 +25,14 @@
 				<text class="price-title">合计：</text>
 				<text class="price-number">¥{{totalPrice.toFixed(2)}}</text>
 			</view>
-			<view class="confirm-btn" @click="createOrder">去结算</view>
+			<view class="confirm-btn" :class="{'OrderStatus':this.status}" @click="createOrder">去结算</view>
 		</view>
 	</view>
 </template>
 
 <script>
 	import uniNumberBox from '@/components/cart/uni-number-box.vue'
-	import SideSlip from '@/components/cart/side-slip.vue'
+	import SideSlip from '@/components/cart/side-slip.vue' //滑动删除组件
 	export default {
 		name: 'cart-item',
 		components: {
@@ -42,7 +42,8 @@
 		data() {
 			return {
 				totalPrice: 0,
-				update: true
+				update: true,
+				status: false
 			}
 		},
 		methods: {
@@ -56,6 +57,7 @@
 				let list = this.$cartList;
 				if (list.length === 0) {
 					this.totalPrice = 0
+					this.status=true;
 					return;
 				}
 				let totalPrice = 0;
@@ -65,6 +67,13 @@
 					}
 				})
 				this.totalPrice = Number(totalPrice.toFixed(2));
+				
+				if(this.totalPrice==0){
+					this.status = true;
+					console.log(this.status)
+				}else if(this.totalPrice !=0){
+					this.status=false;
+				}
 			},
 			//选中状态处理
 			check(type, index) {
@@ -202,6 +211,7 @@
 				font-size: 38upx;
 				color: black;
 			}
+
 			.price-number {
 				font-size: 38upx;
 				color: $theme-color;
@@ -219,6 +229,10 @@
 			color: #FFFFFF;
 			border-top-right-radius: 33px;
 			border-bottom-right-radius: 33px;
+		}
+
+		.OrderStatus {
+			background-color: #5f6368;
 		}
 	}
 </style>
