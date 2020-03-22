@@ -1,10 +1,11 @@
 <template>
 	<view class="fixed-list">
 		<scroll-view class="fixed-scroll" scroll-x="true" scroll-left="120">
-			<view v-for='(item,index) in foodsList' :key='index' class="fixed-product2" @click="detail()">
-				<image class="fixed-image" :src='item.img'></image>
+			<view v-for='(item,index) in foodsList' :key='index' class="fixed-product2">
+				<image class="fixed-image" :src='item.img' @click="detail()"></image>
 				<view class="fixed-title">{{item.name}}</view>
 				<view class="fixed-subtitle">{{item.explain}}</view>
+				<image class="add_img" src="../../../static/type/add.png" @tap="addCart(item,$event)" ></image>
 			</view>
 		</scroll-view>
 	</view>
@@ -24,6 +25,9 @@
 			detail() {
 				this.$msg('还未开发,敬请期待');
 				console.log("点了推荐位");
+			},
+			addCart(item,$event){
+				this.$emit('add',item, $event)
 			}
 		},
 		mounted() {
@@ -46,45 +50,57 @@
 		/* display: flex; */
 		/* justify-content: space-between; */
 		/* flex-wrap: wrap; */
-		/* margin-top: 25upx; */
-		margin: 20upx 30upx;
+		/* margin-top: 25rpx; */
+		margin: 20rpx 30rpx;
 	}
 
 	.fixed-scroll {
 		white-space: nowrap;
 		display: inline-block;
 		border-radius: 50%;
+		
 	}
 
 	.fixed-product2 {
-		width: 333.3upx;
+		width: 333.3rpx;
 		flex-direction: column;
-		border-radius: 20upx;
+		border-radius: 20rpx;
 		background-color: #f2f2f2;
 		padding: 10rpx;
 		display: inline-block;
 		margin-right: 4rpx;
+		position: relative;
 	}
 
 	.fixed-image {
-		/* border-top-left-radius: 8upx;
-		border-top-right-radius: 8upx; */
+		/* border-top-left-radius: 8rpx;
+		border-top-right-radius: 8rpx; */
 		border-radius: 8rpx;
-		width: 333.3upx;
-		height: 188upx;
-		/* margin-bottom: 8upx; */
+		width: 333.3rpx;
+		height: 188rpx;
+		/* margin-bottom: 8rpx; */
 	}
 
 	.fixed-title {
 		color: #1A1A1A;
-		font-size: 27upx;
-		margin-left: 18upx;
+		font-size: 27rpx;
+		margin-left: 18rpx;
 	}
 
 	.fixed-subtitle {
 		color: #8d8d8d;
-		font-size: 21upx;
-		margin-left: 18upx;
-		/* margin-bottom: 8.1upx; */
+		font-size: 21rpx;
+		margin-left: 18rpx;
+		/* margin-bottom: 8.1rpx; */
+	}
+	.add_img {
+		width: 50rpx;
+		height: 50rpx;
+		position: absolute;
+		right: 20rpx;
+		bottom: 15rpx;
+	}
+	.add_img:active {
+		transform: translate(4rpx, 4rpx);
 	}
 </style>

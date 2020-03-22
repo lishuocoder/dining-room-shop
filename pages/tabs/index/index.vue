@@ -12,7 +12,7 @@
 
 		<uni-notice-bar scrollable="true" single="true" text="[公告] 小店新近开张,欢迎各位亲友们光临,本店不为冲量,只为品质和服务.本店东西不多,但却样样精品,质量有保证,售后服务更用心!(^_^)"></uni-notice-bar>
 		<!-- 推荐位 -->
-		<item-container :place='2'></item-container>
+		<item-container :place='2' @add="add_cart"></item-container>
 
 		<!-- 下面是分类部分 -->
 		<view class="list_box">

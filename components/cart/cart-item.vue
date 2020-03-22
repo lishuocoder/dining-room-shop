@@ -5,7 +5,7 @@
 				<view class="cart-item">
 					<checkbox :checked='item.checked' color='#00d8a0' @click="check('item', index)" />
 					<view class="image-wrapper">
-						<image :src="item.img" mode="aspectFill"></image>
+						<image lazy-load :src="item.img" mode="aspectFill"></image>
 					</view>
 					<view class="item-right">
 						<text class="title">{{item.name}}</text>
@@ -110,6 +110,7 @@
 		},
 		mounted() {
 			this.updateTotalPrice();
+			this.$msg('右滑可删除菜品', 1000);
 		}
 	}
 </script>
