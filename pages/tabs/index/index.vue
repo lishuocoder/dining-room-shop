@@ -12,7 +12,7 @@
 
 		<uni-notice-bar scrollable="true" single="true" text="[公告] 小店新近开张,欢迎各位亲友们光临,本店不为冲量,只为品质和服务.本店东西不多,但却样样精品,质量有保证,售后服务更用心!(^_^)"></uni-notice-bar>
 		<!-- 推荐位 -->
-		<item-container :place='2' @add="add_cart"></item-container>
+		<item-container :place='2' @add="add_cart" @detailShow="toggleSpec"></item-container>
 
 		<!-- 下面是分类部分 -->
 		<view class="list_box">
@@ -35,7 +35,7 @@
 								</view>
 								<!-- 遍历菜品 -->
 								<view class="goods" v-for="(item,index) in foodsList" :key="index">
-									<image :src="item.img" />
+									<image :src="item.img" @tap="toggleSpec(item)" />
 									<view>
 										<view class="name">{{item.name}}</view>
 										<view class="describe">{{item.explain}}</view>
@@ -43,7 +43,7 @@
 										<view class="sales_volume">销量:{{item.sales_volume}}</view>
 										<view class="money"> ￥{{item.price}}</view>
 									</view>
-									<image class="add_img" src="../../../static/type/add.png" :data-img="item.img"  @tap="add_cart(item,$event)" ></image>
+									<image class="add_img" src="../../../static/type/add.png" :data-img="item.img" @tap="add_cart(item,$event)"></image>
 								</view>
 							</view>
 						</scroll-view>
@@ -51,8 +51,11 @@
 				</swiper>
 			</view>
 		</view>
+		<!-- 弹出菜品详情页 -->
+		<detailPage :specClass='this.specClass' @close="closeSf" v-if="this.showItem" :food="this.showItem" @add="add_cart"></detailPage>
+		
 		<!-- 加入购物车动画 cartx 和 carty 是购物车位置在屏幕位置的比例 例如左上角x0.1 y0.1 右下角 x0.9 y0.9-->
-			<shopCarAnimation ref="carAnmation" cartx="0.45" carty="1.1"></shopCarAnimation>
+		<shopCarAnimation ref="carAnmation" cartx="0.45" carty="1.1"></shopCarAnimation>
 	</view>
 </template>
 
@@ -62,13 +65,15 @@
 	import WarningBox from '@/components/warning-box/warning-box'
 	//  加入购物车动画组件
 	import shopCarAnimation from '@/components/fly-in-cart/fly-in-cart.vue'
-	
+	import detailPage from '@/components/index/detailPage.vue'
+
 	export default {
 		components: {
 			itemContainer,
 			uniNoticeBar,
 			WarningBox,
-			shopCarAnimation
+			shopCarAnimation,
+			detailPage
 		},
 		data() {
 			return {
@@ -77,7 +82,9 @@
 				foodsList: [],
 				scrollHeight: '500px',
 				leftIndex: 0,
-				show: false
+				show: false,
+				specClass: 'none',
+				showItem:null
 			}
 		},
 		onLoad(option) {
@@ -99,29 +106,29 @@
 			});
 			// console.log(this.$apiPath);
 			uni.request({
-				//轮播图接口
-				url: this.$apiPath + "?c=banner&a=index",
-				dataType: 'json',
-				success: (res) => {
-					if (res.data.error == 0){
-						// console.log(res.data);
-					this.bannerList = res.data.data;
-					}else{
-						console.log(res.data.msg)
+					//轮播图接口
+					url: this.$apiPath + "?c=banner&a=index",
+					dataType: 'json',
+					success: (res) => {
+						if (res.data.error == 0) {
+							// console.log(res.data);
+							this.bannerList = res.data.data;
+						} else {
+							console.log(res.data.msg)
 						}
 					}
 				}),
-			uni.request({
-				//分类接口
-				url: this.$apiPath + "?c=type&a=index",
-				dataType: 'json',
-				success: (res) => {
-					if(res.data.error == 0){
-						this.typeList = res.data.data;
-					// console.log(res.data.data[0].id)
- 					this.getFoodsList(res.data.data[0].id);
-					}else{
-						console.log(res.data.msg)
+				uni.request({
+					//分类接口
+					url: this.$apiPath + "?c=type&a=index",
+					dataType: 'json',
+					success: (res) => {
+						if (res.data.error == 0) {
+							this.typeList = res.data.data;
+							// console.log(res.data.data[0].id)
+							this.getFoodsList(res.data.data[0].id);
+						} else {
+							console.log(res.data.msg)
 						}
 					}
 				})
@@ -150,16 +157,16 @@
 						type_id: typeId
 					},
 					success: (res) => {
-						if(res.data.error == 0){
-						this.foodsList = res.data.data;
-						}else{
-						console.log(res.data.msg)
+						if (res.data.error == 0) {
+							this.foodsList = res.data.data;
+						} else {
+							console.log(res.data.msg)
 						}
 					}
 				})
 			},
 			//添加到购物车
-			add_cart(item,e) {
+			add_cart(item, e) {
 				//查询购物车中是否包含此菜品
 				//如果不包含,直接加入
 				//如果包含,此菜品数量+1
@@ -181,11 +188,17 @@
 				this.$msg('已加入购物车');
 				// console.log(this.$cartList)
 			},
-			// addShopCar(e) {
-			// 	//加到购物车动画方法(不知到为什么不能和加入到购物车方法一起写)
-			// 	console.log("lalala")
-				
-			// }
+			// 控制弹出层显示隐藏
+			toggleSpec(item) {
+				this.showItem=item;
+				this.specClass = 'show';
+			},
+			closeSf() {
+				this.specClass = 'hide';
+				setTimeout(() => {
+					this.specClass = 'none';
+				}, 250);
+			}
 		},
 		onShow() {
 			if (this.typeList.length > 0) {
@@ -342,13 +355,17 @@
 					right: 27rpx;
 					bottom: 63rpx;
 				}
+
 				.add_img:active {
 					transform: translate(4rpx, 4rpx);
 				}
 			}
-			.goods:active{
+
+			.goods:active {
 				background-color: #f6f6f6;
 			}
 		}
 	}
+
+	
 </style>

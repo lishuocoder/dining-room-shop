@@ -2,7 +2,7 @@
 	<view class="fixed-list">
 		<scroll-view class="fixed-scroll" scroll-x="true" scroll-left="120">
 			<view v-for='(item,index) in foodsList' :key='index' class="fixed-product2">
-				<image class="fixed-image" :src='item.img' @click="detail()"></image>
+				<image class="fixed-image" :src='item.img' @tap="detail"></image>
 				<view class="fixed-title">{{item.name}}</view>
 				<view class="fixed-subtitle">{{item.explain}}</view>
 				<image class="add_img" src="../../../static/type/add.png" @tap="addCart(item,$event)" ></image>
@@ -22,12 +22,12 @@
 			place: null
 		},
 		methods: {
-			detail() {
-				this.$msg('还未开发,敬请期待');
-				console.log("点了推荐位");
-			},
 			addCart(item,$event){
 				this.$emit('add',item, $event)
+			},
+			detail(){
+				this.$emit("detailShow");
+				console.log("进来了")
 			}
 		},
 		mounted() {
