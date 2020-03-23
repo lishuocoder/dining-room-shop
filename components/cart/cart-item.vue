@@ -110,7 +110,7 @@
 		},
 		mounted() {
 			this.updateTotalPrice();
-			this.$msg('右滑可删除菜品', 1000);
+			this.$msg('左滑可删除菜品', 1000);
 		}
 	}
 </script>

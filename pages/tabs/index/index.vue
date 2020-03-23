@@ -256,9 +256,9 @@
 
 				&.active,
 				&:active {
-					color: #00d8a0;
+					color: $theme-color;
 					background-color: #fff;
-					// border-right: $theme-color 3px solid;
+					border-left: $theme-color 2px solid;
 				}
 			}
 		}

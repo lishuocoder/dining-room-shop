@@ -3,7 +3,6 @@
 			"path": "pages/tabs/index/index",
 			"style": {
 				"navigationBarTitleText": "欢迎点餐"
-				
 			}
 		},
 		{
@@ -41,7 +40,9 @@
 		}, 
 		{
 			"path": "pages/tabs/cart/confirm",
-			"style": {}
+			"style": {
+				"navigationBarTitleText": "确认订单"
+			}
 		}
 	],
 	"globalStyle": {

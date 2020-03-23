@@ -17,7 +17,7 @@
 			</view>
 		</view>
 		<!-- 备注部分 -->
-		<view class="beizhu">
+		<!-- <view class="beizhu">
 			<form>
 				<view class="title text">备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注:</view>
 				<input class="input" name="input" placeholder="   请输入..." />
@@ -32,7 +32,10 @@
 					</picker>
 				</view>
 			</view>
-		</view>
+		</view> -->
+		
+		<!-- 底部占位 防止出现菜品过多 底部遮挡菜品 -->
+		<view class="buttom"></view>
 
 		<!-- 底部菜单栏 -->
 		<view class="action-section">
@@ -273,7 +276,11 @@
 			color: #FFFFFF;
 			border-top-right-radius: 33px;
 			border-bottom-right-radius: 33px;
-
 		}
+	}
+	
+	.buttom {
+		width: 750upx;
+		height: 100upx;
 	}
 </style>

@@ -28,7 +28,6 @@
 		</view>
 		<!-- 底部占位 防止出现菜品过多 追加按钮无法显示的情况 -->
 		<view class="buttom">
-			<view class="total-box"></view>
 		</view>
 	</view>
 </template>
@@ -199,6 +198,5 @@
 		width: 750upx;
 		height: 100upx;
 		background: #f2f2f2;
-	
 	}
 </style>
