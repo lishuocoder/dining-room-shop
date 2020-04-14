@@ -2,7 +2,7 @@
 	<view>
 		<WarningBox v-model="show" title='警告 ' text='请联系服务员' :noCancel="true" :noOk="true" />
 		<!-- 轮播图 -->
-		<swiper :indicator-dots="true" :autoplay="true" :interval="3000" :duration="1000" indicator-active-color="#00d8a0">
+		<swiper :indicator-dots="true" :autoplay="true" :interval="3000" :duration="1000" indicator-active-color="#208bb5">
 			<swiper-item v-for='(item,index) in bannerList' :key='index'>
 				<a :href="item.url">
 					<image class="swiper-image" :src="item.img"></image>
@@ -36,7 +36,7 @@
 								<!-- 遍历菜品 -->
 								<view class="goods" v-for="(item,index) in foodsList" :key="index">
 									<image :src="item.img" @tap="toggleSpec(item)" />
-									<view>
+									<view @tap="toggleSpec(item)">
 										<view class="name">{{item.name}}</view>
 										<view class="describe">{{item.explain}}</view>
 										<!-- <view>{{number}}</view> -->
@@ -53,7 +53,7 @@
 		</view>
 		<!-- 弹出菜品详情页 -->
 		<detailPage :specClass='this.specClass' @close="closeSf" v-if="this.showItem" :food="this.showItem" @add="add_cart"></detailPage>
-		
+
 		<!-- 加入购物车动画 cartx 和 carty 是购物车位置在屏幕位置的比例 例如左上角x0.1 y0.1 右下角 x0.9 y0.9-->
 		<shopCarAnimation ref="carAnmation" cartx="0.45" carty="1.1"></shopCarAnimation>
 	</view>
@@ -84,7 +84,7 @@
 				leftIndex: 0,
 				show: false,
 				specClass: 'none',
-				showItem:null
+				showItem: null
 			}
 		},
 		onLoad(option) {
@@ -190,7 +190,7 @@
 			},
 			// 控制弹出层显示隐藏
 			toggleSpec(item) {
-				this.showItem=item;
+				this.showItem = item;
 				this.specClass = 'show';
 			},
 			closeSf() {
@@ -222,9 +222,7 @@
 			margin: 20rpx 30rpx 10rpx 30rpx;
 			border-radius: 15rpx;
 		}
-	}
-
-	,
+	},
 	// 下面是分类部分的样式
 	.list_box {
 		display: flex;
@@ -366,6 +364,4 @@
 			}
 		}
 	}
-
-	
 </style>

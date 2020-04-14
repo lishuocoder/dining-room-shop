@@ -3,7 +3,7 @@
 		<view class="uni-numbox-minus" 
 			@click="_calcValue('subtract')"
 		>
-			<text :class="minDisabled?'uni-numbox-disabled': ''" >-</text>
+			<text :class="minDisabled?'uni-numbox-disabled': ''" >–</text>
 		</view>
 		<input 
 			class="uni-numbox-value" 
@@ -160,7 +160,7 @@
 		margin: 0;
 		/* background-color: #f8f8f8; */
 		border-radius: 50%;
-		background-color: #ace7e4;
+		background-color: #208bb5;
 		width: 50upx;
 		height: 50upx;
 		font-size: 34upx;

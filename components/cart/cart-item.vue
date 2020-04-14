@@ -3,7 +3,7 @@
 		<view class="cart-list">
 			<side-slip v-for="(item, index) in this.$cartList" :key="item.id" @remove="delCart(item.id)">
 				<view class="cart-item">
-					<checkbox :checked='item.checked' color='#00d8a0' @click="check('item', index)" />
+					<checkbox :checked='item.checked' color='#208bb5' @click="check('item', index)" />
 					<view class="image-wrapper">
 						<image lazy-load :src="item.img" mode="aspectFill"></image>
 					</view>
