@@ -4,9 +4,7 @@
 		<!-- 轮播图 -->
 		<swiper :indicator-dots="true" :autoplay="true" :interval="3000" :duration="1000" indicator-active-color="#208bb5">
 			<swiper-item v-for='(item,index) in bannerList' :key='index'>
-				<a :href="item.url">
-					<image class="swiper-image" :src="item.img"></image>
-				</a>
+					<image class="swiper-image" :src="item.img" @tap="activity(item.url)"></image>
 			</swiper-item>
 		</swiper>
 
@@ -135,6 +133,10 @@
 		},
 
 		methods: {
+			// banner活动点击
+			activity(url){
+				this.$jump(url);
+			},
 			/* 左侧导航点击 */
 			leftTap(e) {
 				// let index = e.currentTarget.dataset.index;

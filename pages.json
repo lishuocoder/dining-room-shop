@@ -43,7 +43,28 @@
 				"navigationBarTitleText": "确认订单"
 			}
 		}
-	],
+	    ,{
+            "path" : "pages/activityPage/activityOne",
+            "style" : {
+				"navigationBarTitleText": "关注店家",
+				"navigationBarBackgroundColor": "#f9e9b9"
+				
+			}
+        }
+        ,{
+            "path" : "pages/activityPage/activityTwo",
+            "style" : {
+				"navigationBarTitleText": "分店地址",
+				"navigationBarBackgroundColor": "#e9d4a6"
+			}
+        }
+        ,{
+            "path" : "pages/activityPage/activityThree",
+           "style" : {
+           	"navigationBarTitleText": "活动页面"
+           }
+        }
+    ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "手机点餐",
