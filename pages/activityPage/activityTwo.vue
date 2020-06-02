@@ -11,10 +11,7 @@
 				<image src="../../static/index/activity/two/7.png" class="img7" alt="">
 				<image src="../../static/index/activity/two/8.png" class="img8" alt="">
 				<view clsss="bg"></view>
-				<view class="popup">
-					<image src="" class="imgStyle" >
-					<image src="" class="imgStyle" onclick="openHtml(event);" >
-					<image src="../../static/index/activity/two/close.png" alt="" class="close"></view>
+				
 				<text class="pos1"> <i class="circle_bot"></i> <i class="circle_mid"></i>
 				</text>
 				<text class="pos2">

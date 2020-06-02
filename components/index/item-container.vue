@@ -5,7 +5,7 @@
 				<image class="fixed-image" :src='item.img' @tap="detail(item)"></image>
 				<view class="fixed-title">{{item.name}}</view>
 				<view class="fixed-subtitle">{{item.explain}}</view>
-				<image class="add_img" src="../../../static/type/add.png" @tap="addCart(item,$event)" ></image>
+				<image class="add_img" src="../../static/type/add.png" @tap="addCart(item,$event)" ></image>
 			</view>
 		</scroll-view>
 	</view>
