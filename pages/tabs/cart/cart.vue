@@ -1,6 +1,6 @@
 <template>
 	<view class="container">
-		<empty v-if='this.$cartList.length===0'></empty>
+		<empty v-if='this.$cartList.length === 0'></empty>
 		<cart-item ref='cart' v-if="showList" @refresh="refresh"></cart-item>
 	</view>
 </template>
@@ -19,7 +19,7 @@
 			}
 		},
 		onLoad() {
-			/* 购物车角标  还没实现,先放下
+			/* 购物车角标  有问题,先放下
 			uni.setTabBarBadge({
 				index: 1,
 				// text: localStorage.getItem("cartNums")

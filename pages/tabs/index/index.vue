@@ -49,7 +49,7 @@
 				</swiper>
 			</view>
 		</view>
-		<!-- 弹出菜品详情页 -->
+		<!-- 菜品详情页 -->
 		<detailPage :specClass='this.specClass' @close="closeSf" v-if="this.showItem" :food="this.showItem" @add="add_cart"></detailPage>
 
 		<!-- 加入购物车动画 cartx 和 carty 是购物车位置在屏幕位置的比例 例如左上角x0.1 y0.1 右下角 x0.9 y0.9-->
